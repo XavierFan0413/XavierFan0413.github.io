@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "DM Sans";
+  src: url("assets/dm-sans.ttf") format("truetype");
+  font-weight: 100 1000;
+  font-display: swap;
+}
+
+:root {
+  --display: "DM Sans", var(--body);
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+.hero--split {
+  padding-block: clamp(30px, 3.1vw, 46px) clamp(32px, 3.2vw, 48px);
+  grid-template-columns: minmax(0, 0.87fr) minmax(0, 1.13fr);
+  column-gap: clamp(24px, 2.8vw, 42px);
+}
+
+.hero .particle-figure img {
+  background: var(--paper);
+}
+
+.hero .particle-figure figcaption {
+  padding-top: 2px;
+}
+
+.hero .particle-figure a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 24px;
+  font-weight: 550;
+}
+
+.hero h1 {
+  font-size: clamp(46px, 5.2vw, 76px);
+  line-height: 1.06;
+  letter-spacing: -0.027em;
+  text-wrap: balance;
+}
+
+.projects h2 {
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 1.15;
+}
+
+.project-details h3 {
+  font-size: clamp(25px, 2.3vw, 34px);
+  line-height: 1.16;
+}
+
+@media (max-width: 900px) {
+  .hero--split { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 540px) {
+  .hero--split {
+    gap: 16px;
+    padding-block: 35px 27px;
+  }
+
+  .hero h1 {
+    font-size: clamp(36px, 12.5vw, 52px);
+  }
+
+  .hero p { margin-top: 16px; }
+  .project-button { margin-top: 21px; }
+}
