@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="An interactive, synthetic experiment in exact-request approval, tenant scope and idempotency for AI tool calls."><title>Workflow Gate Lab · Fan Xiangwei</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header><a href="../../">Fan Xiangwei <span>/ Engineering experiments</span></a><a href="https://github.com/XavierFan0413/XavierFan0413.github.io/tree/main/demos/workflow-gate">Source & tests ↗</a></header>
+<main>
+<div class="heading"><div><p class="eyebrow">TOOL-CALL RELIABILITY / EXPERIMENT 01</p><h1>Workflow Gate Lab</h1><p class="lede">Inspect what an agent may do <em>before</em> a tool runs.</p></div><p class="scope">Synthetic invoice workflow.<br>No model calls. No emails sent.<br>Everything stays in this tab.</p></div>
+<section class="workspace" aria-label="Interactive workflow evaluation">
+<aside><h2>Choose a scenario</h2><div id="scenarios"></div><button id="suite" class="quiet">Run all 10 scenarios →</button><p id="suite-result" role="status"></p></aside>
+<div class="editor"><div class="section-label"><h2>Proposed tool call</h2><span id="tool-name"></span></div><p class="context" id="actor"></p>
+<label for="recipient">Recipient</label><input id="recipient" autocomplete="off" spellcheck="false">
+<label for="message">Message</label><textarea id="message" rows="5" spellcheck="false"></textarea>
+<details><summary>Inspect request & trusted fixture context</summary><pre id="request-json"></pre></details>
+<div class="actions"><button id="evaluate">Evaluate</button><button id="approve" class="secondary">Simulate reviewer approval</button><button id="execute" class="secondary">Simulate execution</button></div>
+<p class="hint">Try “Approved write”, edit the message, then evaluate again.</p>
+</div>
+<div class="inspector"><div class="section-label"><h2>Gate decision</h2><span id="state-dot" aria-hidden="true"></span></div><div id="decision" role="status" aria-live="polite"></div><p id="reason"></p><p id="explanation"></p><ol id="checks"></ol><div class="digest"><p>REQUEST SHA-256</p><code id="hash"></code></div><div class="outbox"><h3>Synthetic effects <span id="effect-count">0</span></h3><pre id="effects">No operations executed.</pre></div><button id="export" class="quiet">Download current trace ↓</button></div>
+</section>
+<section class="notes"><div><p class="eyebrow">THE ENGINEERING QUESTION</p><h2>Approval must survive a retry.<br>It must not survive a changed request.</h2></div><div><p>This small deterministic gate binds review to the actor, tenant, tool arguments and policy version. It checks the authoritative record and records a synthetic effect once per idempotency key.</p><p>The same JavaScript module powers this interface and the Node test suite. The ten scenarios are development fixtures, not a security benchmark.</p><p><strong>Trust boundary:</strong> a real service must supply authenticated actor context, protect approval storage, and atomically reserve an idempotency key with an outbox transaction. This browser simulation provides none of those production guarantees. It does not judge whether message content is correct or safe.</p><a href="https://github.com/XavierFan0413/XavierFan0413.github.io/blob/main/demos/workflow-gate/README.md">Read the design, limitations & integration plan ↗</a></div></section>
+</main><footer><span>Original public experiment · November 2026 · AI-assisted implementation</span><a href="../../">Back to portfolio ↑</a></footer><script type="module" src="app.mjs"></script></body></html>
